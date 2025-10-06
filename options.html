@@ -19,22 +19,22 @@
     @media (prefers-color-scheme: dark) {
       body { background: #000000; color: #f0f0f0; }
       .card { background: #111111; border: none; }
-      input, button, select { background: #1a1a1a; color: #f0f0f0; border: 1px solid #000000; }
-      input:focus, button:focus { border-color: #333333; box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.3); }
-      .site-item { background: #111111; border: none; }
+      input, button, select { background: #1a1a1a; color: #f0f0f0; border: none; }
+      input:focus, button:focus { outline: 2px solid #333333; box-shadow: none; }
+      .site-item { background: #111111; border: none; border-top: 1px solid #222222; }
       .site-item:hover { background: #1a1a1a; }
-      .table-header { background: #0a0a0a; border: none; }
+      .table-header { background: #0a0a0a; border: none; border-bottom: 1px solid #222222; }
     }
     @media (prefers-color-scheme: light) {
       body { background: #ffffff; color: #1f2937; }
-      .card { background: #f9fafb; border-color: #e5e7eb; }
-      input, button, select { background: #ffffff; color: #1f2937; border-color: #d1d5db; }
-      input:focus, button:focus { border-color: #9ca3af; box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2); }
-      .site-item { background: #f9fafb; border-color: #e5e7eb; }
+      .card { background: #f9fafb; border: 1px solid #f3f4f6; }
+      input, button, select { background: #ffffff; color: #1f2937; border: 1px solid #e5e7eb; }
+      input:focus, button:focus { border-color: #d1d5db; box-shadow: 0 0 0 2px rgba(209, 213, 219, 0.2); }
+      .site-item { background: #f9fafb; border: none; border-top: 1px solid #f3f4f6; }
       .site-item:hover { background: #f3f4f6; }
       h1 { color: #1f2937; }
       .card h2 { color: #374151; }
-      .table-header { background: #f3f4f6; border-color: #e5e7eb; }
+      .table-header { background: #f3f4f6; border: none; border-bottom: 1px solid #e5e7eb; }
     }
     h1 {
       text-align: center;
