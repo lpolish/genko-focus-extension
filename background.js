@@ -25,8 +25,10 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set(settings);
     loadSettings();
   });
-  // Open options page for new users
-  chrome.tabs.create({ url: chrome.runtime.getURL('options.html') });
+  // Open options page for new users with a small delay
+  setTimeout(() => {
+    chrome.tabs.create({ url: chrome.runtime.getURL('options.html') });
+  }, 1000);
 });
 
 // Load settings from storage
