@@ -7,21 +7,8 @@
     "activeTab",
     "storage",
     "notifications",
-    "tabs"
-  ],
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*.facebook.com/*",
-        "*://*.twitter.com/*",
-        "*://*.instagram.com/*",
-        "*://*.tiktok.com/*",
-        "*://*.youtube.com/*",
-        "*://*.reddit.com/*"
-      ],
-      "js": ["content.js"],
-      "css": ["styles.css"]
-    }
+    "tabs",
+    "scripting"
   ],
   "action": {
     "default_popup": "popup.html",
