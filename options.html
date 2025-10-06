@@ -16,26 +16,6 @@
       line-height: 1.6;
       transition: background-color 0.3s, color 0.3s;
     }
-    @media (prefers-color-scheme: dark) {
-      body { background: #000000; color: #f0f0f0; }
-      .card { background: #111111; border: 1px solid #000000; }
-      input, button, select { background: #1a1a1a; color: #f0f0f0; border: 1px solid #000000; }
-      input:focus, button:focus { border-color: #000000; outline: none; box-shadow: none; }
-      .site-item { background: #111111; border: 1px solid #000000; border-top: none; }
-      .site-item:hover { background: #1a1a1a; }
-      .table-header { background: #0a0a0a; border: 1px solid #000000; border-bottom: none; }
-    }
-    @media (prefers-color-scheme: light) {
-      body { background: #ffffff; color: #1f2937; }
-      .card { background: #f9fafb; border: 1px solid #f8f9fa; }
-      input, button, select { background: #ffffff; color: #1f2937; border: 1px solid #f8f9fa; }
-      input:focus, button:focus { border-color: #f3f4f6; box-shadow: 0 0 0 2px rgba(248, 249, 250, 0.2); }
-      .site-item { background: #f9fafb; border: 1px solid #f8f9fa; border-top: none; }
-      .site-item:hover { background: #f3f4f6; }
-      h1 { color: #1f2937; }
-      .card h2 { color: #374151; }
-      .table-header { background: #f3f4f6; border: 1px solid #f8f9fa; border-bottom: none; }
-    }
     h1 {
       text-align: center;
       margin-bottom: 30px;
@@ -196,6 +176,34 @@
       margin-top: 10px;
       font-weight: bold;
       color: #d1d5db;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #000000; color: #f0f0f0; }
+      .card { background: #111111; border: 1px solid #000000; }
+      input, button, select { background: #1a1a1a; color: #f0f0f0; border: 1px solid #000000; }
+      input:focus, button:focus { border-color: #000000; outline: none; box-shadow: none; }
+      .site-item { background: #111111; border: 1px solid #000000; border-top: none; }
+      .site-item:hover { background: #1a1a1a; }
+      .table-header { background: #0a0a0a; border: 1px solid #000000; border-bottom: none; }
+      .site-item .time-col input[type="number"] { background: #1a1a1a; color: #f0f0f0; border: 1px solid #000000; }
+      .site-item .message-col input[type="text"] { background: #1a1a1a; color: #f0f0f0; border: 1px solid #000000; }
+      .add-site input { background: #1a1a1a; color: #f0f0f0; border: 1px solid #000000; }
+      .form-group input { background: #1a1a1a; color: #f0f0f0; border: 1px solid #000000; }
+    }
+    @media (prefers-color-scheme: light) {
+      body { background: #ffffff; color: #1f2937; }
+      .card { background: #f9fafb; border: 1px solid #f8f9fa; }
+      input, button, select { background: #ffffff; color: #1f2937; border: 1px solid #f8f9fa; }
+      input:focus, button:focus { border-color: #f3f4f6; box-shadow: 0 0 0 2px rgba(248, 249, 250, 0.2); }
+      .site-item { background: #f9fafb; border: 1px solid #f8f9fa; border-top: none; }
+      .site-item:hover { background: #f3f4f6; }
+      h1 { color: #1f2937; }
+      .card h2 { color: #374151; }
+      .table-header { background: #f3f4f6; border: 1px solid #f8f9fa; border-bottom: none; }
+      .site-item .time-col input[type="number"] { background: #ffffff; color: #1f2937; border: 1px solid #f8f9fa; }
+      .site-item .message-col input[type="text"] { background: #ffffff; color: #1f2937; border: 1px solid #f8f9fa; }
+      .add-site input { background: #ffffff; color: #1f2937; border: 1px solid #f8f9fa; }
+      .form-group input { background: #ffffff; color: #1f2937; border: 1px solid #f8f9fa; }
     }
   </style>
 </head>
