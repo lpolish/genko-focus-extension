@@ -32,10 +32,10 @@ function renderSites(sites) {
     div.className = 'site-item';
     div.innerHTML = `
       <input type="checkbox" ${config.enabled ? 'checked' : ''} data-domain="${domain}">
-      <span>${domain}</span>
-      <input type="number" value="${config.timeLimit}" min="1" data-domain="${domain}" data-type="time">
-      <input type="text" value="${config.message}" data-domain="${domain}" data-type="message">
-      <button data-domain="${domain}" class="remove-site">Remove</button>
+      <div class="site-name">${domain}</div>
+      <div class="time-col"><input type="number" value="${config.timeLimit}" min="1" data-domain="${domain}" data-type="time"></div>
+      <div class="message-col"><input type="text" value="${config.message}" data-domain="${domain}" data-type="message"></div>
+      <div class="actions-col"><button data-domain="${domain}" class="remove-site">Remove</button></div>
     `;
     container.appendChild(div);
   }

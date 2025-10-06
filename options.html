@@ -9,8 +9,8 @@
       padding: 0;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      max-width: 800px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 900px;
       margin: 0 auto;
       padding: 20px;
       line-height: 1.6;
@@ -18,11 +18,12 @@
     }
     @media (prefers-color-scheme: dark) {
       body { background: #000000; color: #f0f0f0; }
-      .card { background: #111111; border-color: #222222; }
-      input, button, select { background: #1a1a1a; color: #f0f0f0; border-color: #333333; }
-      input:focus, button:focus { border-color: #555555; box-shadow: 0 0 0 2px rgba(85, 85, 85, 0.3); }
-      .site-item { background: #111111; border-color: #222222; }
+      .card { background: #111111; border: none; }
+      input, button, select { background: #1a1a1a; color: #f0f0f0; border: 1px solid #000000; }
+      input:focus, button:focus { border-color: #333333; box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.3); }
+      .site-item { background: #111111; border: none; }
       .site-item:hover { background: #1a1a1a; }
+      .table-header { background: #0a0a0a; border: none; }
     }
     @media (prefers-color-scheme: light) {
       body { background: #ffffff; color: #1f2937; }
@@ -33,6 +34,7 @@
       .site-item:hover { background: #f3f4f6; }
       h1 { color: #1f2937; }
       .card h2 { color: #374151; }
+      .table-header { background: #f3f4f6; border-color: #e5e7eb; }
     }
     h1 {
       text-align: center;
@@ -53,50 +55,84 @@
     }
     .site-list {
       display: grid;
-      gap: 10px;
+      gap: 0;
     }
+    .table-header {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      font-weight: bold;
+      font-size: 14px;
+      border: 1px solid;
+      border-bottom: none;
+    }
+    .table-header .site-name { flex: 1; }
+    .table-header .time-col { width: 80px; text-align: center; }
+    .table-header .message-col { flex: 2; }
+    .table-header .actions-col { width: 80px; text-align: center; }
     .site-item {
       display: flex;
       align-items: center;
-      padding: 15px;
-      border-radius: 8px;
+      padding: 12px 15px;
       border: 1px solid;
+      border-top: none;
       transition: all 0.2s;
     }
     .site-item input[type="checkbox"] {
       margin-right: 15px;
       transform: scale(1.2);
+      flex-shrink: 0;
     }
     .site-item .site-name {
       flex: 1;
-      font-weight: bold;
+      font-weight: 500;
       margin-right: 15px;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .site-item input[type="number"] {
+    .site-item .time-col {
       width: 80px;
-      padding: 5px;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+    .site-item .time-col input[type="number"] {
+      width: 100%;
+      padding: 6px;
       border-radius: 4px;
       border: 1px solid;
       text-align: center;
+      font-size: 14px;
     }
-    .site-item input[type="text"] {
+    .site-item .message-col {
       flex: 2;
-      padding: 5px;
+      margin-right: 15px;
+      min-width: 0;
+    }
+    .site-item .message-col input[type="text"] {
+      width: 100%;
+      padding: 6px;
       border-radius: 4px;
       border: 1px solid;
-      margin-left: 10px;
+      font-size: 14px;
     }
-    .site-item button {
+    .site-item .actions-col {
+      width: 80px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    .site-item .actions-col button {
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: none;
       background: #374151;
       color: #f0f0f0;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
       cursor: pointer;
-      margin-left: 10px;
+      font-size: 12px;
+      font-weight: 500;
       transition: background 0.2s;
     }
-    .site-item button:hover {
+    .site-item .actions-col button:hover {
       background: #4b5563;
     }
     .form-group {
@@ -126,27 +162,28 @@
       border: 1px solid;
     }
     .add-site button {
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: none;
       background: #374151;
       color: #f0f0f0;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
+      font-size: 14px;
+      font-weight: 500;
       transition: background 0.2s;
     }
     .add-site button:hover {
       background: #4b5563;
     }
     #save-btn {
+      padding: 12px 20px;
+      border-radius: 6px;
+      border: none;
       background: #374151;
       color: #f0f0f0;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 6px;
       cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
+      font-size: 14px;
+      font-weight: 500;
       transition: background 0.2s;
       display: block;
       margin: 20px auto;
@@ -168,7 +205,15 @@
 
   <div class="card">
     <h2>📋 Blocked Sites</h2>
-    <div id="sites-list" class="site-list"></div>
+    <div class="site-list">
+      <div class="table-header">
+        <div class="site-name">Site</div>
+        <div class="time-col">Time (s)</div>
+        <div class="message-col">Message</div>
+        <div class="actions-col">Actions</div>
+      </div>
+      <div id="sites-list"></div>
+    </div>
     <div class="add-site">
       <input type="text" id="new-site" placeholder="e.g., example.com" />
       <button id="add-site-btn">➕ Add Site</button>
