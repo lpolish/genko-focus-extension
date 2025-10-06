@@ -57,38 +57,7 @@ function loadSettings() {
     blockedMessage = settings.blockedMessage;
     
     console.log('Settings loaded:', { timeLimits, reminderMessages });
-    
-    // Register content scripts dynamically
-    registerContentScripts();
   });
-}
-
-// Register content scripts dynamically based on enabled sites
-async function registerContentScripts() {
-  try {
-    // Unregister existing content scripts
-    await chrome.scripting.unregisterContentScripts();
-    console.log('Unregistered existing content scripts');
-  } catch (e) {
-    console.log('No existing content scripts to unregister or error:', e);
-  }
-
-  // Register new scripts for enabled domains
-  const scripts = Object.keys(timeLimits).map(domain => ({
-    id: `content-${domain}`,
-    matches: [`*://*.${domain}/*`],
-    js: ['content.js'],
-    css: ['styles.css']
-  }));
-
-  if (scripts.length > 0) {
-    try {
-      await chrome.scripting.registerContentScripts(scripts);
-      console.log('Content scripts registered for domains:', Object.keys(timeLimits));
-    } catch (e) {
-      console.error('Error registering content scripts:', e);
-    }
-  }
 }
 
 // Reload settings when changed
