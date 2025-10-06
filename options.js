@@ -12,7 +12,7 @@ const defaultSettings = {
   },
   defaultTime: 300, // 5 minutes
   reminderMessage: 'Stay focused and productive! Avoid distractions.',
-  blockedMessage: 'Time limit exceeded. Redirecting to help you stay on track.'
+  blockedMessage: 'Time limit exceeded. Take a break and refocus on your priorities.'
 };
 
 function loadSettings() {

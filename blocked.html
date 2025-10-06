@@ -22,7 +22,7 @@
 <body>
   <h1>🚫 Access Blocked</h1>
   <p id="blocked-message">Time limit exceeded. Focus on your goals!</p>
-  <p>Redirecting to a productive page...</p>
+  <p>Take a break and refocus on your priorities.</p>
   <script>
     chrome.storage.sync.get({ blockedMessage: 'Time limit exceeded. Redirecting to help you stay on track.' }, (settings) => {
       document.getElementById('blocked-message').textContent = settings.blockedMessage;
