@@ -3,45 +3,197 @@
 <head>
   <title>Productivity Blocker Options</title>
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 20px auto;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
       padding: 20px;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
     }
     @media (prefers-color-scheme: dark) {
-      body { background-color: #121212; color: #ffffff; }
-      input, button { background-color: #333; color: #fff; border: 1px solid #555; }
+      body { background: linear-gradient(135deg, #1a1a2e, #16213e); color: #e8e8e8; }
+      .card { background: #0f3460; border-color: #1a1a2e; }
+      input, button, select { background: #1a1a2e; color: #e8e8e8; border-color: #533483; }
+      input:focus, button:focus { border-color: #e94560; box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2); }
+      .site-item { background: #0f3460; border-color: #1a1a2e; }
+      .site-item:hover { background: #16213e; }
     }
     @media (prefers-color-scheme: light) {
-      body { background-color: #ffffff; color: #000000; }
-      input, button { background-color: #fff; color: #000; border: 1px solid #ccc; }
+      body { background: linear-gradient(135deg, #f5f7fa, #c3cfe2); color: #333; }
+      .card { background: #ffffff; border-color: #e1e8ed; }
+      input, button, select { background: #ffffff; color: #333; border-color: #bdc3c7; }
+      input:focus, button:focus { border-color: #3498db; box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2); }
+      .site-item { background: #ffffff; border-color: #e1e8ed; }
+      .site-item:hover { background: #f8f9fa; }
     }
-    .site-item { margin-bottom: 10px; display: flex; align-items: center; }
-    .site-item input[type="checkbox"] { margin-right: 10px; }
-    .site-item input[type="number"] { width: 80px; margin-left: 10px; }
-    .site-item input[type="text"] { flex: 1; margin-left: 10px; }
-    button { padding: 10px; margin: 10px 0; cursor: pointer; }
-    .add-site { margin-top: 20px; }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5em;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card {
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid;
+    }
+    .card h2 {
+      margin-bottom: 15px;
+      color: #ff6b6b;
+      font-size: 1.5em;
+    }
+    .site-list {
+      display: grid;
+      gap: 10px;
+    }
+    .site-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid;
+      transition: all 0.2s;
+    }
+    .site-item input[type="checkbox"] {
+      margin-right: 15px;
+      transform: scale(1.2);
+    }
+    .site-item .site-name {
+      flex: 1;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+    .site-item input[type="number"] {
+      width: 80px;
+      padding: 5px;
+      border-radius: 4px;
+      border: 1px solid;
+      text-align: center;
+    }
+    .site-item input[type="text"] {
+      flex: 2;
+      padding: 5px;
+      border-radius: 4px;
+      border: 1px solid;
+      margin-left: 10px;
+    }
+    .site-item button {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: background 0.2s;
+    }
+    .site-item button:hover {
+      background: #e55b5b;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid;
+      font-size: 16px;
+    }
+    .add-site {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .add-site input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid;
+    }
+    .add-site button {
+      background: #4ecdc4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .add-site button:hover {
+      background: #45b7aa;
+    }
+    #save-btn {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background 0.2s;
+      display: block;
+      margin: 20px auto;
+    }
+    #save-btn:hover {
+      background: #2980b9;
+    }
+    #status {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #27ae60;
+    }
   </style>
 </head>
 <body>
-  <h1>Productivity Blocker Settings</h1>
-  <p>Configure sites to block, time limits, and custom messages to boost your productivity.</p>
+  <h1>🚀 Productivity Blocker Settings</h1>
+  <p style="text-align: center; margin-bottom: 30px; font-size: 1.1em;">Configure sites to block, time limits, and custom messages to boost your productivity.</p>
 
-  <h2>Blocked Sites</h2>
-  <div id="sites-list"></div>
-  <div class="add-site">
-    <input type="text" id="new-site" placeholder="e.g., example.com" />
-    <button id="add-site-btn">Add Site</button>
+  <div class="card">
+    <h2>📋 Blocked Sites</h2>
+    <div id="sites-list" class="site-list"></div>
+    <div class="add-site">
+      <input type="text" id="new-site" placeholder="e.g., example.com" />
+      <button id="add-site-btn">➕ Add Site</button>
+    </div>
   </div>
 
-  <h2>General Settings</h2>
-  <label>Default Time Limit (seconds): <input type="number" id="default-time" min="1" /></label><br>
-  <label>Reminder Message: <input type="text" id="reminder-message" placeholder="Stay focused!" /></label><br>
-  <label>Blocked Page Message: <input type="text" id="blocked-message" placeholder="Time limit exceeded. Focus on your goals!" /></label><br>
+  <div class="card">
+    <h2>⚙️ General Settings</h2>
+    <div class="form-group">
+      <label for="default-time">Default Time Limit (seconds):</label>
+      <input type="number" id="default-time" min="1" />
+    </div>
+    <div class="form-group">
+      <label for="reminder-message">Reminder Message:</label>
+      <input type="text" id="reminder-message" placeholder="Stay focused!" />
+    </div>
+    <div class="form-group">
+      <label for="blocked-message">Blocked Page Message:</label>
+      <input type="text" id="blocked-message" placeholder="Time limit exceeded!" />
+    </div>
+  </div>
 
-  <button id="save-btn">Save Settings</button>
+  <button id="save-btn">💾 Save Settings</button>
   <div id="status"></div>
 
   <script src="options.js"></script>
