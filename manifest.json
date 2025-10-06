@@ -27,6 +27,9 @@
     "default_popup": "popup.html",
     "default_title": "Genko Focus Reminder"
   },
+  "background": {
+    "service_worker": "background.js"
+  },
   "options_page": "options.html",
   "icons": {
     "16": "icon16.png",

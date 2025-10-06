@@ -25,10 +25,22 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set(settings);
     loadSettings();
   });
+  // Initialize timeSpent from storage
+  chrome.storage.local.get(['timeSpent'], (result) => {
+    timeSpent = result.timeSpent || {};
+  });
   // Open options page for new users with a small delay
   setTimeout(() => {
     chrome.tabs.create({ url: chrome.runtime.getURL('options.html') });
   }, 1000);
+});
+
+// Initialize on startup as well
+chrome.runtime.onStartup.addListener(() => {
+  loadSettings();
+  chrome.storage.local.get(['timeSpent'], (result) => {
+    timeSpent = result.timeSpent || {};
+  });
 });
 
 // Load settings from storage
@@ -43,6 +55,8 @@ function loadSettings() {
       }
     }
     blockedMessage = settings.blockedMessage;
+    
+    console.log('Settings loaded:', { timeLimits, reminderMessages });
   });
 }
 
@@ -60,17 +74,28 @@ setInterval(() => {
 setInterval(async () => {
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab && tab.url) {
+    if (tab && tab.url && tab.url.startsWith('http')) {
       const url = new URL(tab.url);
       const domain = url.hostname.replace('www.', '');
+      
+      console.log(`Checking domain: ${domain}, timeLimits:`, timeLimits);
+      
       if (timeLimits[domain]) {
         timeSpent[domain] = (timeSpent[domain] || 0) + 1000;
+        
+        console.log(`Time spent on ${domain}: ${timeSpent[domain]}ms, limit: ${timeLimits[domain]}ms`);
+        
         if (timeSpent[domain] >= timeLimits[domain]) {
+          console.log(`Time limit exceeded for ${domain}, redirecting...`);
+          
           // Redirect to blocked page
           const blockedUrl = chrome.runtime.getURL('blocked.html');
           chrome.tabs.update(tab.id, { url: blockedUrl });
-          // Reset time or notify
+          
+          // Reset time
           timeSpent[domain] = 0;
+          
+          // Show notification
           chrome.notifications.create({
             type: 'basic',
             iconUrl: 'icon48.png',
@@ -81,6 +106,6 @@ setInterval(async () => {
       }
     }
   } catch (e) {
-    // Ignore errors, e.g., invalid URL
+    console.error('Error in time checking:', e);
   }
 }, 1000);
