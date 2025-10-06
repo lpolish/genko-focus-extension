@@ -17,29 +17,27 @@
       transition: background-color 0.3s, color 0.3s;
     }
     @media (prefers-color-scheme: dark) {
-      body { background: linear-gradient(135deg, #0f0f23, #1a1a2e); color: #e2e8f0; }
-      .card { background: #2a2a3e; border-color: #3a3a5e; }
-      input, button, select { background: #1e1e3f; color: #e2e8f0; border-color: #4a4a6a; }
-      input:focus, button:focus { border-color: #6366f1; box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3); }
-      .site-item { background: #2a2a3e; border-color: #3a3a5e; }
-      .site-item:hover { background: #3a3a5e; }
+      body { background: #000000; color: #f0f0f0; }
+      .card { background: #111111; border-color: #222222; }
+      input, button, select { background: #1a1a1a; color: #f0f0f0; border-color: #333333; }
+      input:focus, button:focus { border-color: #555555; box-shadow: 0 0 0 2px rgba(85, 85, 85, 0.3); }
+      .site-item { background: #111111; border-color: #222222; }
+      .site-item:hover { background: #1a1a1a; }
     }
     @media (prefers-color-scheme: light) {
-      body { background: linear-gradient(135deg, #f0f4f8, #e2e8f0); color: #1e293b; }
-      .card { background: #ffffff; border-color: #cbd5e1; }
-      input, button, select { background: #ffffff; color: #1e293b; border-color: #94a3b8; }
-      input:focus, button:focus { border-color: #6366f1; box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2); }
-      .site-item { background: #ffffff; border-color: #cbd5e1; }
-      .site-item:hover { background: #f1f5f9; }
+      body { background: #ffffff; color: #1f2937; }
+      .card { background: #f9fafb; border-color: #e5e7eb; }
+      input, button, select { background: #ffffff; color: #1f2937; border-color: #d1d5db; }
+      input:focus, button:focus { border-color: #9ca3af; box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2); }
+      .site-item { background: #f9fafb; border-color: #e5e7eb; }
+      .site-item:hover { background: #f3f4f6; }
+      h1 { color: #1f2937; }
+      .card h2 { color: #374151; }
     }
     h1 {
       text-align: center;
       margin-bottom: 30px;
       font-size: 2.5em;
-      background: linear-gradient(45deg, #6366f1, #10b981);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
     .card {
       border-radius: 12px;
@@ -50,7 +48,7 @@
     }
     .card h2 {
       margin-bottom: 15px;
-      color: #6366f1;
+      color: #e0e0e0;
       font-size: 1.5em;
     }
     .site-list {
@@ -89,8 +87,8 @@
       margin-left: 10px;
     }
     .site-item button {
-      background: #ef4444;
-      color: white;
+      background: #374151;
+      color: #f0f0f0;
       border: none;
       padding: 5px 10px;
       border-radius: 4px;
@@ -99,7 +97,7 @@
       transition: background 0.2s;
     }
     .site-item button:hover {
-      background: #dc2626;
+      background: #4b5563;
     }
     .form-group {
       margin-bottom: 15px;
@@ -128,8 +126,8 @@
       border: 1px solid;
     }
     .add-site button {
-      background: #10b981;
-      color: white;
+      background: #374151;
+      color: #f0f0f0;
       border: none;
       padding: 10px 20px;
       border-radius: 6px;
@@ -138,11 +136,11 @@
       transition: background 0.2s;
     }
     .add-site button:hover {
-      background: #059669;
+      background: #4b5563;
     }
     #save-btn {
-      background: #6366f1;
-      color: white;
+      background: #374151;
+      color: #f0f0f0;
       border: none;
       padding: 12px 24px;
       border-radius: 6px;
@@ -154,13 +152,13 @@
       margin: 20px auto;
     }
     #save-btn:hover {
-      background: #4f46e5;
+      background: #4b5563;
     }
     #status {
       text-align: center;
       margin-top: 10px;
       font-weight: bold;
-      color: #10b981;
+      color: #d1d5db;
     }
   </style>
 </head>
