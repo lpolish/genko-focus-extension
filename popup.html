@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Genko Focus Reminder</title>
+  <title>Productivity Blocker</title>
   <style>
-    body { width: 300px; padding: 20px; font-family: Arial, sans-serif; }
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background-color: #121212; color: #ffffff; }
+    }
+    @media (prefers-color-scheme: light) {
+      body { background-color: #ffffff; color: #000000; }
+    }
     h1 { font-size: 18px; color: #333; }
-    p { color: #666; }
+    p { color: inherit; }
   </style>
 </head>
 <body>
-  <h1>🚀 Genko Focus Reminder</h1>
-  <p>Stay disciplined! Focus on putting Genko to make money and avoid social media distractions until it's done.</p>
-  <p>Remember: Strict discipline leads to success!</p>
+  <h1>🚀 Productivity Blocker</h1>
+  <p id="popup-message">Stay focused and productive! Avoid distractions.</p>
+  <script>
+    chrome.storage.sync.get({ reminderMessage: 'Stay focused and productive! Avoid distractions.' }, (settings) => {
+      document.getElementById('popup-message').textContent = settings.reminderMessage;
+    });
+  </script>
 </body>
 </html>

@@ -1,21 +1,52 @@
-// Background script for Genko Focus Reminder
-const timeLimits = {
-  'facebook.com': 7000, // 7 seconds
-  'twitter.com': 7000,
-  'instagram.com': 7000,
-  'tiktok.com': 7000,
-  'reddit.com': 7000,
-  'youtube.com': 3600000 // 1 hour
+// Background script for Productivity Blocker
+let timeLimits = {};
+let timeSpent = {};
+let reminderMessages = {};
+let blockedMessage = 'Time limit exceeded. Focus on your goals!';
+
+const defaultSettings = {
+  sites: {
+    'facebook.com': { enabled: true, timeLimit: 7, message: 'Stay productive! Avoid distractions.' },
+    'twitter.com': { enabled: true, timeLimit: 7, message: 'Focus on your goals!' },
+    'instagram.com': { enabled: true, timeLimit: 7, message: 'Time to be productive!' },
+    'tiktok.com': { enabled: true, timeLimit: 7, message: 'Distractions blocked. Get back to work!' },
+    'reddit.com': { enabled: true, timeLimit: 7, message: 'Prioritize productivity!' },
+    'youtube.com': { enabled: true, timeLimit: 3600, message: 'YouTube time up. Focus on tasks!' }
+  },
+  defaultTime: 300,
+  reminderMessage: 'Stay focused and productive! Avoid distractions.',
+  blockedMessage: 'Time limit exceeded. Redirecting to help you stay on track.'
 };
 
-let timeSpent = {}; // { domain: milliseconds }
-
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('Genko Focus Reminder extension installed.');
-  // Initialize timeSpent from storage
-  chrome.storage.local.get(['timeSpent'], (result) => {
-    timeSpent = result.timeSpent || {};
+  console.log('Productivity Blocker extension installed.');
+  // Initialize settings if not exist
+  chrome.storage.sync.get(defaultSettings, (settings) => {
+    chrome.storage.sync.set(settings);
+    loadSettings();
   });
+  // Open options page for new users
+  chrome.tabs.create({ url: chrome.runtime.getURL('options.html') });
+});
+
+// Load settings from storage
+function loadSettings() {
+  chrome.storage.sync.get(defaultSettings, (settings) => {
+    timeLimits = {};
+    reminderMessages = {};
+    for (const [domain, config] of Object.entries(settings.sites)) {
+      if (config.enabled) {
+        timeLimits[domain] = config.timeLimit * 1000; // convert to ms
+        reminderMessages[domain] = config.message;
+      }
+    }
+    blockedMessage = settings.blockedMessage;
+  });
+}
+
+// Reload settings when changed
+chrome.storage.onChanged.addListener(() => {
+  loadSettings();
 });
 
 // Save timeSpent to storage periodically
@@ -42,7 +73,7 @@ setInterval(async () => {
             type: 'basic',
             iconUrl: 'icon48.png',
             title: 'Time Limit Exceeded',
-            message: `You've spent too much time on ${domain}. Focus on Genko!`
+            message: reminderMessages[domain] || 'Focus on your productivity!'
           });
         }
       }

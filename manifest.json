@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Genko Focus Reminder",
+  "name": "Productivity Blocker",
   "version": "1.0",
-  "description": "Reminds you to focus on Genko to make money and avoid distractions from social media.",
+  "description": "Block distracting websites with customizable time limits and messages to boost your productivity.",
   "permissions": [
     "activeTab",
     "storage",
@@ -27,9 +27,7 @@
     "default_popup": "popup.html",
     "default_title": "Genko Focus Reminder"
   },
-  "background": {
-    "service_worker": "background.js"
-  },
+  "options_page": "options.html",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",

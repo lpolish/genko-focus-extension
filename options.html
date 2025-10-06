@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Productivity Blocker Options</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background-color: #121212; color: #ffffff; }
+      input, button { background-color: #333; color: #fff; border: 1px solid #555; }
+    }
+    @media (prefers-color-scheme: light) {
+      body { background-color: #ffffff; color: #000000; }
+      input, button { background-color: #fff; color: #000; border: 1px solid #ccc; }
+    }
+    .site-item { margin-bottom: 10px; display: flex; align-items: center; }
+    .site-item input[type="checkbox"] { margin-right: 10px; }
+    .site-item input[type="number"] { width: 80px; margin-left: 10px; }
+    .site-item input[type="text"] { flex: 1; margin-left: 10px; }
+    button { padding: 10px; margin: 10px 0; cursor: pointer; }
+    .add-site { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Productivity Blocker Settings</h1>
+  <p>Configure sites to block, time limits, and custom messages to boost your productivity.</p>
+
+  <h2>Blocked Sites</h2>
+  <div id="sites-list"></div>
+  <div class="add-site">
+    <input type="text" id="new-site" placeholder="e.g., example.com" />
+    <button id="add-site-btn">Add Site</button>
+  </div>
+
+  <h2>General Settings</h2>
+  <label>Default Time Limit (seconds): <input type="number" id="default-time" min="1" /></label><br>
+  <label>Reminder Message: <input type="text" id="reminder-message" placeholder="Stay focused!" /></label><br>
+  <label>Blocked Page Message: <input type="text" id="blocked-message" placeholder="Time limit exceeded. Focus on your goals!" /></label><br>
+
+  <button id="save-btn">Save Settings</button>
+  <div id="status"></div>
+
+  <script src="options.js"></script>
+</body>
+</html>

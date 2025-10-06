@@ -3,17 +3,30 @@
 <head>
   <title>Access Blocked</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f0f0f0; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background-color: #121212; color: #ffffff; }
+    }
+    @media (prefers-color-scheme: light) {
+      body { background-color: #ffffff; color: #000000; }
+    }
     h1 { color: #ff6b6b; }
-    p { color: #333; }
+    p { color: inherit; }
   </style>
 </head>
 <body>
   <h1>🚫 Access Blocked</h1>
-  <p>You've exceeded the time limit on this site.</p>
-  <p>Remember: Focus on putting Genko to make money! Avoid distractions and stay disciplined.</p>
+  <p id="blocked-message">Time limit exceeded. Focus on your goals!</p>
   <p>Redirecting to a productive page...</p>
   <script>
+    chrome.storage.sync.get({ blockedMessage: 'Time limit exceeded. Redirecting to help you stay on track.' }, (settings) => {
+      document.getElementById('blocked-message').textContent = settings.blockedMessage;
+    });
     setTimeout(() => {
       window.location.href = 'chrome://newtab';
     }, 3000);
